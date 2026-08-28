@@ -1,0 +1,39 @@
+﻿@import "tailwindcss";
+
+@layer base {
+  :root {
+    --background: 0 0% 100%;
+    --foreground: 222.2 84% 4.9%;
+  }
+}
+
+/* Luxurious Slow-Flowing Aurora Gradient matching reference image */
+@keyframes auroraShift {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+.aurora-animated-text {
+  background: linear-gradient(
+    115deg,
+    #9333ea 0%,
+    #c026d3 20%,
+    #d946ef 40%,
+    #ec4899 60%,
+    #4f46e5 80%,
+    #9333ea 100%
+  );
+  background-size: 200% auto;
+  animation: auroraShift 12s ease-in-out infinite;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  display: inline-block;
+  padding-bottom: 2px;
+}
