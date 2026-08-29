@@ -1,17 +1,15 @@
+<img width="1280" height="720" alt="Screenshot 2026-08-29 103043" src="https://github.com/user-attachments/assets/76fc90b2-42a0-4999-a5f8-5d809ef3f7f0" />
 # ManagicAI — AI Copilot & Semantic Work Graph for Celebrity & Talent Management
 > **Wexa AI Take-Home Assignment Submission: Build a Graph Database Application backed by CognoDB Cloud**
 
-[![Live Demo](https://img.shields.io/badge/Demo-Live%20Hosted%20App-purple?style=for-the-badge&logo=vercel)](https://managic-ai-production.vercel.app)
-[![Screen Recording](https://img.shields.io/badge/Video-Screen%20Recording%20Demo-red?style=for-the-badge&logo=youtube)](https://loom.com)
-[![Database](https://img.shields.io/badge/Database-CognoDB%20Cloud%20(Bolt%205.4)-0052CC?style=for-the-badge)](https://console.cognodb.com)
-[![Next.js 15](https://img.shields.io/badge/Framework-Next.js%2015.5-black?style=for-the-badge&logo=next.js)](https://nextjs.org)
+
 [![Tests](https://img.shields.io/badge/Tests-Passing%20(19%2F19)-emerald?style=for-the-badge)](tests/)
 
 ---
 
 ## 🔗 Quick Deliverable Links (Wexa AI Assessment)
-- **Hosted Application Demo**: [https://managic-ai-production.vercel.app](https://managic-ai-production.vercel.app) *(Replace with your live Vercel / Netlify deployment link)*
-- **Screen Recording / Video Walkthrough**: [https://loom.com/share/your-video-id](https://loom.com/share/your-video-id) *(Replace with your Loom / Google Drive / YouTube video link)*
+- **Hosted Application Demo**: [https://managic-ai-production.vercel.app](https://managic-ai-production.vercel.app) 
+
 - **GitHub Repository**: [https://github.com/Parth-1808/ManagicAI-Graph-Database-Application](https://github.com/Parth-1808/ManagicAI-Graph-Database-Application)
 - **Submission Recipient**: `hr@wexa.ai` with subject `CognoDB Assignment 2 – <Your Name>`
 
