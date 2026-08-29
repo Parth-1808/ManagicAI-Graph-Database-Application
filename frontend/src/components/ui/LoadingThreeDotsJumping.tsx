@@ -71,8 +71,12 @@ export function PageTransitionLoader({ children }: { children: React.ReactNode }
           >
             <div className="flex flex-col items-center space-y-6">
               {/* Brand icon */}
-              <div className="h-12 w-12 rounded-2xl bg-gradient-to-tr from-purple-600 via-indigo-600 to-blue-500 flex items-center justify-center text-white font-black text-xl shadow-lg shadow-purple-500/25">
-                ◈
+              <div className="h-14 w-14 rounded-2xl bg-white/90 p-1 border border-purple-200/80 shadow-lg shadow-purple-500/25 flex items-center justify-center overflow-hidden">
+                <img
+                  src="/logo.png"
+                  alt="ManagicAI Logo"
+                  className="w-full h-full object-contain"
+                />
               </div>
 
               {/* Jumping dots animation */}

@@ -31,10 +31,14 @@ export const AppNavbar: React.FC = () => {
           <TransitionLink
             href="/dashboard"
             targetTitle="Home Dashboard"
-            className="flex items-center gap-2 px-2 shrink-0 group"
+            className="flex items-center gap-2 px-1.5 shrink-0 group"
           >
-            <div className="h-7 w-7 rounded-full bg-gradient-to-tr from-purple-600 via-indigo-600 to-blue-500 flex items-center justify-center text-white font-bold text-xs shadow-sm group-hover:scale-105 transition-transform">
-              ◈
+            <div className="h-8 w-8 rounded-xl overflow-hidden shadow-xs group-hover:scale-105 transition-transform flex items-center justify-center bg-white/50 border border-purple-100/60 p-0.5">
+              <img
+                src="/logo.png"
+                alt="ManagicAI Logo"
+                className="w-full h-full object-contain"
+              />
             </div>
             <span className="font-extrabold text-sm tracking-tight text-slate-900">
               ManagicAI

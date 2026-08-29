@@ -5,6 +5,16 @@ import { PageTransitionProvider } from "@/context/PageTransitionContext";
 export const metadata: Metadata = {
   title: "Managic AI | Graph-Powered Enterprise Operations & Decision System",
   description: "Graph-native operational decision platform powered by CognoDB and openCypher.",
+  icons: {
+    icon: [
+      { url: "/logo.png", type: "image/png" },
+      { url: "/favicon.ico" },
+    ],
+    shortcut: ["/logo.png"],
+    apple: [
+      { url: "/logo.png" },
+    ],
+  },
 };
 
 export default function RootLayout({

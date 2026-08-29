@@ -13,10 +13,12 @@ export const Header: React.FC = () => {
         targetTitle="Landing Overview"
         className="flex items-center gap-3.5 group pointer-events-auto select-none"
       >
-        <div className="h-11 w-11 sm:h-12 sm:w-12 rounded-2xl bg-gradient-to-tr from-purple-600 via-indigo-600 to-pink-500 p-[1.5px] shadow-sm group-hover:scale-105 transition-transform duration-300">
-          <div className="h-full w-full bg-white/90 backdrop-blur-md rounded-[14px] flex items-center justify-center">
-            <GitFork className="h-6 w-6 text-purple-600 group-hover:rotate-12 transition-transform duration-300" />
-          </div>
+        <div className="h-11 w-11 sm:h-12 sm:w-12 rounded-2xl overflow-hidden shadow-sm group-hover:scale-105 transition-transform duration-300 bg-white/90 backdrop-blur-md p-1 border border-purple-200/80 flex items-center justify-center">
+          <img
+            src="/logo.png"
+            alt="ManagicAI Logo"
+            className="w-full h-full object-contain"
+          />
         </div>
 
         <span className="font-black text-2xl sm:text-3xl tracking-tight text-[#0f172a] drop-shadow-2xs">
