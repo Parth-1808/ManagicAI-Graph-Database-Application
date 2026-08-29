@@ -1,4 +1,4 @@
-﻿import { talentRepository } from '../repositories/talent.repository';
+import { talentRepository } from '../repositories/talent.repository';
 import { intelligenceRepository } from '../repositories/intelligence.repository';
 import { calendarRepository } from '../repositories/calendar.repository';
 

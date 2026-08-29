@@ -1,6 +1,9 @@
 import { NextResponse } from 'next/server';
 import { seedCognoDBDatabase } from '@/lib/seedCognoDB';
 
+export const dynamic = 'force-dynamic';
+export const runtime = 'nodejs';
+
 export async function POST() {
   try {
     const result = await seedCognoDBDatabase();

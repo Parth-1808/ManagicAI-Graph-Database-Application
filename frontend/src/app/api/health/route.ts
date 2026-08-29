@@ -1,6 +1,9 @@
-﻿import { NextResponse } from 'next/server';
+import { NextResponse } from 'next/server';
 import { withErrorHandler } from '@/server/errors/error-handler';
 import { pingCognoDB } from '@/server/db/cognodb.client';
+
+export const dynamic = 'force-dynamic';
+export const runtime = 'nodejs';
 
 export const GET = withErrorHandler(async () => {
   const ping = await pingCognoDB();

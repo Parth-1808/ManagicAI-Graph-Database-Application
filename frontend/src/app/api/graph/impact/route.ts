@@ -1,6 +1,9 @@
-﻿import { NextRequest, NextResponse } from 'next/server';
+import { NextRequest, NextResponse } from 'next/server';
 import { withErrorHandler } from '@/server/errors/error-handler';
 import { graphService } from '@/server/services/graph.service';
+
+export const dynamic = 'force-dynamic';
+export const runtime = 'nodejs';
 
 export const POST = withErrorHandler(async (req: NextRequest) => {
   const { rootId } = await req.json().catch(() => ({}));

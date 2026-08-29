@@ -1,6 +1,9 @@
-﻿import { NextResponse } from 'next/server';
+import { NextResponse } from 'next/server';
 import { withErrorHandler } from '@/server/errors/error-handler';
 import { calendarRepository } from '@/server/repositories/calendar.repository';
+
+export const dynamic = 'force-dynamic';
+export const runtime = 'nodejs';
 
 export const GET = withErrorHandler(async () => {
   const events = await calendarRepository.getEvents();

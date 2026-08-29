@@ -1,4 +1,4 @@
-﻿import { executeCypher } from '../db/cognodb.client';
+import { executeCypher } from '../db/cognodb.client';
 
 export interface TalentRootStats {
   talentName: string;
