@@ -162,10 +162,47 @@ src/server/
 - Node.js 20.x or higher
 - A free instance on [CognoDB Cloud](https://console.cognodb.com)
 
+- The free instance is created by this steps:- 1. How to Create and Provision a CognoDB Cloud Instance
+Sign Up / Log In to CognoDB Cloud:
+
+a.Go to https://console.cognodb.com (or the CognoDB cloud portal).
+b.Sign in using your organization credentials or GitHub / Google SSO.
+c.Create a New Graph Database Instance:
+
+d.In the dashboard, click + New Database / Create Instance.
+e.Database Name: managic-production-db
+f.Database Tier: Standard (or Free / Developer Sandbox).
+g.Graph Engine: openCypher / Neo4j-compatible engine (Bolt Protocol 5.0–5.4).
+h.Region: Choose the closest cloud region (e.g., AWS us-east-1 or GCP us-central1).
+i.Secure Your Credentials:
+
+Once provisioned, CognoDB generates your connection string and credentials:
+Connection URI: bolt+s://<INSTANCE_ID>.<CLUSTER>.databases.cognodb.cloud:7687
+Default Username: cognodb (or neo4j)
+Generated Password: <AUTO_GENERATED_SECURE_PASSWORD>
+Protocol: bolt+s:// (Bolt Protocol over TLS with strict SSL encryption).
+2. Environment Configuration (frontend/.env.local)
+Add the connection credentials to 
+frontend/.env.local
+:
+
+
+
+3. How to Seed the Enterprise Graph Schema (npm run seed)
+Run the automated seeder to initialize the graph schema with 64 nodes, 114 relationships, indices, and unique constraints:
+
+bash
+
+
+cd frontend
+npm run seed
+What the Seeder Creates in CognoDB:
+
+
 ### 2. Environment Configuration (`.env.local`)
 Create `.env.local` inside `frontend/`:
 ```env
-COGNODB_URI=bolt+s://db-62c8531c.bravo.databases.cognodb.com
+COGNODB_URI=
 COGNODB_USER=cognodb
 COGNODB_PASSWORD=your_password
 COGNODB_API_KEY=your_api_key
