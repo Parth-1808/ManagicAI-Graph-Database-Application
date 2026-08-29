@@ -1,4 +1,5 @@
-<img width="1280" height="720" alt="Screenshot 2026-08-29 103043" src="https://github.com/user-attachments/assets/76fc90b2-42a0-4999-a5f8-5d809ef3f7f0" />
+
+
 # ManagicAI — AI Copilot & Semantic Work Graph for Celebrity & Talent Management
 > **Wexa AI Take-Home Assignment Submission: Build a Graph Database Application backed by CognoDB Cloud**
 
@@ -134,45 +135,37 @@ RETURN collect(distinct [n in nodes(path) | n.id]) AS impactedNodeIds;
 
 > *Attach your application UI screenshots below to demonstrate the visual interface and user workflows:*
 
-### 1. 3D Semantic Work Graph & Neural Canvas
+### 1. Landing page 
 Interactive 3D graph visualizer rendering 64 nodes and 114 relationships across 5 domain hubs with force-directed physics, real-time node filtering, and focus inspection.
+<img width="1280" height="720" alt="Screenshot 2026-08-29 103043" src="https://github.com/user-attachments/assets/76fc90b2-42a0-4999-a5f8-5d809ef3f7f0" />
 
-```
-<!-- ATTACH SCREENSHOT 1: 3D Graph Canvas (frontend/public/screenshots/graph-3d.png) -->
-```
-![3D Graph Canvas](./frontend/public/screenshots/graph-3d.png)
+
 
 ---
 
-### 2. Executive Talent Dashboard & Clearance Health
+### 2. Executive Talent Dashboard
 Real-time dashboard showing portfolio valuation (₹335+ Cr), 100% legal clearance health, live shoot status (*War 2*), and revenue streams.
 
-```
-<!-- ATTACH SCREENSHOT 2: Talent Dashboard (frontend/public/screenshots/dashboard.png) -->
-```
-![Talent Dashboard](./frontend/public/screenshots/dashboard.png)
+<img width="1280" height="720" alt="Screenshot 2026-08-29 111947" src="https://github.com/user-attachments/assets/e3796065-5a15-462c-b779-78ebcc808d48" />
+
 
 ---
 
-### 3. AI Conflict Radar & Legal Shield Intelligence
+### 3. workspace 
 Automated brand collision isolation radar protecting exclusive covenants against competing endorsements (Tag Heuer vs Rolex/Rado, AI likeness exploits).
 
-```
-<!-- ATTACH SCREENSHOT 3: Conflict Radar & Intelligence (frontend/public/screenshots/intelligence.png) -->
-```
-![Conflict Radar & Intelligence](./frontend/public/screenshots/intelligence.png)
+<img width="1280" height="720" alt="Screenshot 2026-08-29 111958" src="https://github.com/user-attachments/assets/f0bfabb8-26e8-4032-8ae3-18d9f628a4cd" />
 
----
-
-### 4. Collaborative Workspace & Production Calendar
+### 4. Insights
 Operational management for shoot call-sheets, brand invitations, escrow milestones, and Cannes travel manifests.
 
-```
-<!-- ATTACH SCREENSHOT 4: Workspace & Calendar (frontend/public/screenshots/workspace.png) -->
-```
-![Workspace & Calendar](./frontend/public/screenshots/workspace.png)
+<img width="1280" height="720" alt="Screenshot 2026-08-29 112013" src="https://github.com/user-attachments/assets/f57038a5-df93-46e5-84aa-05b50668cff4" />
 
----
+
+### 5.Backend and Graphs:- 
+Cogno db database overview
+<img width="1280" height="720" alt="Screenshot 2026-08-29 114400" src="https://github.com/user-attachments/assets/3f7b46eb-3c88-4b6f-ada1-aa61531dbc19" />
+<img width="1280" height="720" alt="Screenshot 2026-08-28 205436" src="https://github.com/user-attachments/assets/c5b400d8-b7ea-41cd-b71f-699443fb8253" />
 
 ## 6. How to Set Up & Provision CognoDB Cloud
 
