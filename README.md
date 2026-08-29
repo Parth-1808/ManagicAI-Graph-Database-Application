@@ -1,18 +1,45 @@
-
-
 # ManagicAI — AI Copilot & Semantic Work Graph for Celebrity & Talent Management
 > **Wexa AI Take-Home Assignment Submission: Build a Graph Database Application backed by CognoDB Cloud**
 
-
+[![Live Demo](https://img.shields.io/badge/Demo-Live%20Hosted%20App-purple?style=for-the-badge&logo=vercel)](https://managic-ai-production.vercel.app)
+[![Screen Recording](https://img.shields.io/badge/Video-Watch%20Demo%20Recording-red?style=for-the-badge&logo=youtube)](./managic-ai-demo-recording.mp4)
+[![Database](https://img.shields.io/badge/Database-CognoDB%20Cloud%20(Bolt%205.4)-0052CC?style=for-the-badge)](https://console.cognodb.com)
+[![Next.js 15](https://img.shields.io/badge/Framework-Next.js%2015.5-black?style=for-the-badge&logo=next.js)](https://nextjs.org)
 [![Tests](https://img.shields.io/badge/Tests-Passing%20(19%2F19)-emerald?style=for-the-badge)](tests/)
 
 ---
 
 ## 🔗 Quick Deliverable Links (Wexa AI Assessment)
-- **Hosted Application Demo**: [https://managic-ai-production.vercel.app](https://managic-ai-production.vercel.app) 
-
+- **Hosted Application Demo**: [https://managic-ai-production.vercel.app](https://managic-ai-production.vercel.app) *(Replace with your live Vercel deployment link)*
+- **Screen Recording Video**: [▶ View / Download Walkthrough Video (`managic-ai-demo-recording.mp4`)](./managic-ai-demo-recording.mp4)
 - **GitHub Repository**: [https://github.com/Parth-1808/ManagicAI-Graph-Database-Application](https://github.com/Parth-1808/ManagicAI-Graph-Database-Application)
 - **Submission Recipient**: `hr@wexa.ai` with subject `CognoDB Assignment 2 – <Your Name>`
+
+---
+
+## 🎬 Screen Recording & Application Walkthrough
+
+<div align="center">
+  <video src="./managic-ai-demo-recording.mp4" controls="controls" width="100%" style="max-height: 540px; border-radius: 12px; border: 1px solid rgba(255, 255, 255, 0.1); box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);">
+    Your browser does not support the video tag.
+  </video>
+</div>
+
+<br/>
+
+> 💡 **Direct File Link**: [▶ Open Video (`managic-ai-demo-recording.mp4`)](./managic-ai-demo-recording.mp4)  
+
+### ⏱️ Video Timeline & Feature Breakdown
+
+| Timestamp | Feature / Screen | CognoDB openCypher & Architectural Concepts Demonstrated |
+|---|---|---|
+| **00:00 – 00:30** | **Landing Page & System Overview** | Overview of the Autonomous Semantic Work Graph for A-list talent management, live architecture, and core thesis. |
+| **00:30 – 01:15** | **3D Interactive Semantic Canvas** | **64 Nodes & 114 Typed Relationships**: Real-time 3D orbital canvas across 5 domain hubs (Films, Brands, VIP Events, Legal Shields, Industry Network) with force-directed physics and node inspection. |
+| **01:15 – 02:00** | **Executive Talent Dashboard** | Real-time portfolio valuation (₹335+ Cr), 100% legal clearance health scoring, film franchise statuses (*War 2*, *Krrish 4*, *Fighter*), and live revenue streams. |
+| **02:00 – 02:45** | **AI Conflict Radar & Shield Enforcements** | **Relational-Awkward Query**: Automated isolation of competing brand deals (*Tag Heuer* horology collision vs *Rolex/Rado*, fast-fashion AI likeness exploit) before reaching talent inboxes. |
+| **02:45 – 03:30** | **Multi-Hop Traversal (2+ Hops)** | **Stunt Precedence to Cannes VIP Gala**: Causal graph traversal verifying completion bond rest buffers between high-risk action combat shoots and private jet departure to Palais des Festivals. |
+| **03:30 – 04:15** | **Collaborative Workspace & Schedule** | Live shoot call-sheets, brand invitations, escrow milestones, and Cannes travel manifests backed by live graph operations. |
+| **04:15 – End** | **AI Copilot & Graph Querying** | Natural language reasoning over CognoDB graph topology, parameterized Cypher execution, and real-time response synthesis. |
 
 ---
 
@@ -133,39 +160,33 @@ RETURN collect(distinct [n in nodes(path) | n.id]) AS impactedNodeIds;
 
 ## 5. UI Showcase & Screenshots
 
-> *Attach your application UI screenshots below to demonstrate the visual interface and user workflows:*
-
-### 1. Landing page 
+### 1. 3D Semantic Work Graph & Neural Canvas
 Interactive 3D graph visualizer rendering 64 nodes and 114 relationships across 5 domain hubs with force-directed physics, real-time node filtering, and focus inspection.
-<img width="1280" height="720" alt="Screenshot 2026-08-29 103043" src="https://github.com/user-attachments/assets/76fc90b2-42a0-4999-a5f8-5d809ef3f7f0" />
 
-
+![3D Graph Canvas](./frontend/public/screenshots/graph-3d.png)
 
 ---
 
-### 2. Executive Talent Dashboard
+### 2. Executive Talent Dashboard & Clearance Health
 Real-time dashboard showing portfolio valuation (₹335+ Cr), 100% legal clearance health, live shoot status (*War 2*), and revenue streams.
 
-<img width="1280" height="720" alt="Screenshot 2026-08-29 111947" src="https://github.com/user-attachments/assets/e3796065-5a15-462c-b779-78ebcc808d48" />
-
+![Talent Dashboard](./frontend/public/screenshots/dashboard.png)
 
 ---
 
-### 3. workspace 
+### 3. AI Conflict Radar & Legal Shield Intelligence
 Automated brand collision isolation radar protecting exclusive covenants against competing endorsements (Tag Heuer vs Rolex/Rado, AI likeness exploits).
 
-<img width="1280" height="720" alt="Screenshot 2026-08-29 111958" src="https://github.com/user-attachments/assets/f0bfabb8-26e8-4032-8ae3-18d9f628a4cd" />
+![Conflict Radar & Intelligence](./frontend/public/screenshots/intelligence.png)
 
-### 4. Insights
+---
+
+### 4. Collaborative Workspace & Production Calendar
 Operational management for shoot call-sheets, brand invitations, escrow milestones, and Cannes travel manifests.
 
-<img width="1280" height="720" alt="Screenshot 2026-08-29 112013" src="https://github.com/user-attachments/assets/f57038a5-df93-46e5-84aa-05b50668cff4" />
+![Workspace & Calendar](./frontend/public/screenshots/workspace.png)
 
-
-### 5.Backend and Graphs:- 
-Cogno db database overview
-<img width="1280" height="720" alt="Screenshot 2026-08-29 114400" src="https://github.com/user-attachments/assets/3f7b46eb-3c88-4b6f-ada1-aa61531dbc19" />
-<img width="1280" height="720" alt="Screenshot 2026-08-28 205436" src="https://github.com/user-attachments/assets/c5b400d8-b7ea-41cd-b71f-699443fb8253" />
+---
 
 ## 6. How to Set Up & Provision CognoDB Cloud
 
@@ -273,4 +294,4 @@ src/server/
 - [x] **CI/CD Automation**: GitHub Actions workflow (`.github/workflows/ci.yml`).
 - [x] **Enterprise Architecture**: 4-Tier Clean Architecture with connection pooling & retry backoff.
 - [x] **Polished UI/UX**: Next.js 15, Tailwind CSS, 3D Semantic Canvas, AI Copilot, Insights analytics.
-- [x] **Screenshots & Hosted Demo**: Designated placeholders for screenshots, live demo, and video walkthrough.
+- [x] **Screen Recording Video**: Embedded `managic-ai-demo-recording.mp4` with complete breakdown timeline.
