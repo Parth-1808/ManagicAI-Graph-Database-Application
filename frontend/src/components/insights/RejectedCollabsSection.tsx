@@ -49,8 +49,21 @@ export const RejectedCollabsSection: React.FC = () => {
       </div>
 
       {/* Cards List */}
-      <div className="space-y-3">
-        {rejectedCollabs.map((collab: any) => {
+      {(!rejectedCollabs || rejectedCollabs.length === 0) ? (
+        <div className="space-y-3 animate-pulse">
+          {[1, 2].map((i) => (
+            <div key={i} className="rounded-2xl border border-rose-100/80 bg-rose-50/30 p-4 h-28 flex flex-col justify-between">
+              <div className="flex justify-between">
+                <div className="h-4 w-32 bg-rose-200/50 rounded-full" />
+                <div className="h-4 w-16 bg-rose-200/50 rounded-full" />
+              </div>
+              <div className="h-3 w-3/4 bg-rose-100/60 rounded-full" />
+            </div>
+          ))}
+        </div>
+      ) : (
+        <div className="space-y-3">
+          {rejectedCollabs.map((collab: any) => {
           const isExpanded = !!expanded[collab.id];
 
           return (
@@ -125,6 +138,7 @@ export const RejectedCollabsSection: React.FC = () => {
           );
         })}
       </div>
+      )}
     </div>
   );
 };

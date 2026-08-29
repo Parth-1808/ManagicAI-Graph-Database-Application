@@ -2,6 +2,8 @@ const { describe, it, before, after } = require('node:test');
 const assert = require('node:assert');
 const path = require('path');
 const fs = require('fs');
+const dns = require('dns');
+try { dns.setDefaultResultOrder('ipv4first'); } catch {}
 const neo4j = require('neo4j-driver');
 
 // Read .env.local
@@ -25,7 +27,7 @@ if (fs.existsSync(envPath)) {
   }
 }
 
-const URI = process.env.COGNODB_URI || env.COGNODB_URI || 'bolt+s://db-62c8531c.bravo.databases.cognodb.cloud';
+const URI = process.env.COGNODB_URI || env.COGNODB_URI || 'bolt+s://db-62c8531c.bravo.databases.cognodb.com';
 const USER = process.env.COGNODB_USER || env.COGNODB_USER || 'cognodb';
 const PASSWORD = process.env.COGNODB_PASSWORD || env.COGNODB_PASSWORD || 'af829ec1c54011534c1aab45a9dbcd3f';
 

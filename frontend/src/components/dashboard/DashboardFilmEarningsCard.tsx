@@ -67,9 +67,26 @@ export const DashboardFilmEarningsCard: React.FC = () => {
         </div>
       </div>
 
-      {/* Clean Movie Grid */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
-        {filteredFilms.map((film) => (
+      {/* Loading Skeleton */}
+      {isLoadingOverview && filmsList.length === 0 ? (
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 animate-pulse">
+          {[1, 2, 3].map((i) => (
+            <div key={i} className="rounded-2xl bg-purple-950/10 min-h-[260px] p-4 flex flex-col justify-between">
+              <div className="flex justify-between">
+                <div className="h-5 w-20 bg-purple-200/50 rounded-full" />
+                <div className="h-5 w-12 bg-purple-200/50 rounded-full" />
+              </div>
+              <div className="space-y-2">
+                <div className="h-6 w-3/4 bg-purple-200/60 rounded-full" />
+                <div className="h-4 w-1/2 bg-purple-200/40 rounded-full" />
+              </div>
+            </div>
+          ))}
+        </div>
+      ) : (
+        /* Clean Movie Grid */
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
+          {filteredFilms.map((film) => (
           <div
             key={film.id}
             className="group relative rounded-2xl overflow-hidden min-h-[260px] flex flex-col justify-between p-4 shadow-sm hover:shadow-xl hover:scale-[1.01] transition-all duration-300 bg-slate-950"
@@ -121,6 +138,7 @@ export const DashboardFilmEarningsCard: React.FC = () => {
           </div>
         ))}
       </div>
+      )}
     </div>
   );
 };

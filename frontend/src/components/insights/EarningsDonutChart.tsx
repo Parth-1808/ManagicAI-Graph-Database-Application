@@ -70,9 +70,14 @@ export const EarningsDonutChart: React.FC<EarningsDonutChartProps> = ({
       </div>
 
       {/* Donut Chart & Breakdown Stats */}
-      <div className="grid grid-cols-1 md:grid-cols-12 gap-6 items-center">
-        {/* Recharts Donut */}
-        <div className="md:col-span-5 relative h-56 flex items-center justify-center">
+      {(!data || data.length === 0) ? (
+        <div className="h-56 w-full flex items-center justify-center animate-pulse">
+          <div className="h-44 w-44 rounded-full border-8 border-purple-200/50 border-t-purple-600 animate-spin" />
+        </div>
+      ) : (
+        <div className="grid grid-cols-1 md:grid-cols-12 gap-6 items-center">
+          {/* Recharts Donut */}
+          <div className="md:col-span-5 relative h-56 flex items-center justify-center">
           <ResponsiveContainer width="100%" height="100%">
             <PieChart>
               <Pie
@@ -144,6 +149,7 @@ export const EarningsDonutChart: React.FC<EarningsDonutChartProps> = ({
           ))}
         </div>
       </div>
+      )}
     </div>
   );
 };

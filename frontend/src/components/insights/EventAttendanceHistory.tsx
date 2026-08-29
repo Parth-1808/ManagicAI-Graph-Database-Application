@@ -77,8 +77,21 @@ export const EventAttendanceHistory: React.FC = () => {
       </div>
 
       {/* Events Grid */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-        {filteredEvents.map((evt: any) => (
+      {(!filteredEvents || filteredEvents.length === 0) ? (
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 animate-pulse">
+          {[1, 2, 3].map((i) => (
+            <div key={i} className="rounded-2xl border border-purple-100 bg-white/60 h-64 p-4 flex flex-col justify-between">
+              <div className="h-28 bg-purple-200/50 rounded-xl" />
+              <div className="space-y-2">
+                <div className="h-4 w-3/4 bg-purple-200/60 rounded-full" />
+                <div className="h-3 w-1/2 bg-purple-200/40 rounded-full" />
+              </div>
+            </div>
+          ))}
+        </div>
+      ) : (
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+          {filteredEvents.map((evt: any) => (
           <div
             key={evt.id}
             className="rounded-2xl border border-purple-100 bg-white/80 overflow-hidden shadow-2xs hover:shadow-md hover:border-purple-300 transition-all flex flex-col justify-between"
@@ -144,6 +157,7 @@ export const EventAttendanceHistory: React.FC = () => {
           </div>
         ))}
       </div>
+      )}
     </div>
   );
 };

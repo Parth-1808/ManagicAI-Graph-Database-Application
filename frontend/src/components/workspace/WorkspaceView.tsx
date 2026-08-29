@@ -91,6 +91,22 @@ export const WorkspaceView: React.FC = () => {
       {/* Conflict Radar Always Visible on Top of Operations or in Conflicts tab */}
       {showConflicts && <WorkspaceConflictsAlerts />}
 
+      {/* Loading Skeleton while fetching live CognoDB data */}
+      {isLoadingWorkspace && !hasAnyResults && (
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 animate-pulse">
+          <div className="h-44 rounded-3xl bg-white/60 border border-purple-100/60 p-6 space-y-3">
+            <div className="h-5 w-48 bg-purple-200/60 rounded-full" />
+            <div className="h-4 w-full bg-purple-100/60 rounded-full" />
+            <div className="h-4 w-3/4 bg-purple-100/60 rounded-full" />
+          </div>
+          <div className="h-44 rounded-3xl bg-white/60 border border-purple-100/60 p-6 space-y-3">
+            <div className="h-5 w-48 bg-purple-200/60 rounded-full" />
+            <div className="h-4 w-full bg-purple-100/60 rounded-full" />
+            <div className="h-4 w-3/4 bg-purple-100/60 rounded-full" />
+          </div>
+        </div>
+      )}
+
       {/* Empty State if filter yields nothing */}
       {isTabEmpty && !isLoadingWorkspace && (
         <EmptyState

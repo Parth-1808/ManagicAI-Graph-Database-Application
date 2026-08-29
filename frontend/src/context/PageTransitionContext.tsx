@@ -2,12 +2,12 @@
 
 import React, { createContext, useContext, useState, useEffect, useRef, useCallback, useMemo } from 'react';
 import { usePathname, useRouter } from 'next/navigation';
+import Link from 'next/link';
 
 interface PageTransitionContextType {
   isTransitioning: boolean;
   progress: number;
   targetPath: string | null;
-  targetTitle: string;
   startTransition: (href: string, title?: string) => void;
 }
 
@@ -15,19 +15,8 @@ const PageTransitionContext = createContext<PageTransitionContextType>({
   isTransitioning: false,
   progress: 0,
   targetPath: null,
-  targetTitle: '',
   startTransition: () => {},
 });
-
-const ROUTE_TITLES: Record<string, string> = {
-  '/': 'Landing Overview',
-  '/dashboard': 'Home Dashboard',
-  '/workspace': 'Workspace Hub',
-  '/insights': 'Intelligence & Insights',
-  '/graph': 'Enterprise Graph Canvas',
-};
-
-const MIN_TRANSITION_MS = 280; // Crisp, responsive 280ms transition
 
 export const PageTransitionProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const router = useRouter();
@@ -36,112 +25,69 @@ export const PageTransitionProvider: React.FC<{ children: React.ReactNode }> = (
   const [isTransitioning, setIsTransitioning] = useState(false);
   const [progress, setProgress] = useState(0);
   const [targetPath, setTargetPath] = useState<string | null>(null);
-  const [targetTitle, setTargetTitle] = useState('');
 
-  const rafRef = useRef<number | null>(null);
-  const startTimeRef = useRef<number | null>(null);
-  const activeTargetRef = useRef<string | null>(null);
-  const timeoutsRef = useRef<NodeJS.Timeout[]>([]);
+  const prevPathnameRef = useRef(pathname);
+  const timerRef = useRef<NodeJS.Timeout | null>(null);
 
-  const cleanUpAnimation = useCallback(() => {
-    if (rafRef.current) {
-      cancelAnimationFrame(rafRef.current);
-      rafRef.current = null;
+  // When pathname changes (route change completed), complete progress bar
+  useEffect(() => {
+    if (prevPathnameRef.current !== pathname) {
+      prevPathnameRef.current = pathname;
+      setProgress(100);
+      const t = setTimeout(() => {
+        setIsTransitioning(false);
+        setProgress(0);
+        setTargetPath(null);
+      }, 150);
+      return () => clearTimeout(t);
     }
-    startTimeRef.current = null;
-    timeoutsRef.current.forEach((t) => clearTimeout(t));
-    timeoutsRef.current = [];
-  }, []);
+  }, [pathname]);
 
   const startTransition = useCallback(
-    (href: string, title?: string) => {
-      // Clean target pathname
+    (href: string, _title?: string) => {
       const targetClean = href.split('?')[0].split('#')[0];
       const currentClean = (pathname || '/').split('?')[0].split('#')[0];
 
-      // If already on the exact same page, no transition needed
       if (targetClean === currentClean && href === pathname) {
         return;
       }
 
-      // Pre-warm route in Next.js router cache
-      if (href.startsWith('/') && !href.startsWith('#')) {
-        try {
-          router.prefetch(href);
-        } catch {
-          // Ignore prefetch error
-        }
-      }
-
-      // Determine human readable label
-      const determinedTitle = title || ROUTE_TITLES[targetClean] || 'Page';
-
-      cleanUpAnimation();
-
       setTargetPath(href);
-      activeTargetRef.current = href;
-      setTargetTitle(determinedTitle);
-      setProgress(0);
       setIsTransitioning(true);
+      setProgress(35);
 
-      const step = (timestamp: number) => {
-        if (!startTimeRef.current) {
-          startTimeRef.current = timestamp;
-        }
+      if (timerRef.current) clearTimeout(timerRef.current);
+      timerRef.current = setTimeout(() => {
+        setProgress(85);
+      }, 80);
 
-        const elapsed = timestamp - startTimeRef.current;
-        const currentProgress = Math.min(100, (elapsed / MIN_TRANSITION_MS) * 100);
-
-        setProgress(currentProgress);
-
-        if (elapsed < MIN_TRANSITION_MS) {
-          rafRef.current = requestAnimationFrame(step);
-        } else {
-          // Reached 100%
-          setProgress(100);
-
-          const t1 = setTimeout(() => {
-            if (activeTargetRef.current) {
-              router.push(activeTargetRef.current);
-            }
-
-            const t2 = setTimeout(() => {
-              setIsTransitioning(false);
-              setProgress(0);
-              setTargetPath(null);
-              activeTargetRef.current = null;
-            }, 60);
-            timeoutsRef.current.push(t2);
-          }, 40);
-          timeoutsRef.current.push(t1);
-        }
-      };
-
-      rafRef.current = requestAnimationFrame(step);
+      // Instant non-blocking route push
+      router.push(href);
     },
-    [pathname, router, cleanUpAnimation]
+    [pathname, router]
   );
-
-  // Clean up on unmount
-  useEffect(() => {
-    return () => {
-      cleanUpAnimation();
-    };
-  }, [cleanUpAnimation]);
 
   const contextValue = useMemo(
     () => ({
       isTransitioning,
       progress,
       targetPath,
-      targetTitle,
       startTransition,
     }),
-    [isTransitioning, progress, targetPath, targetTitle, startTransition]
+    [isTransitioning, progress, targetPath, startTransition]
   );
 
   return (
     <PageTransitionContext.Provider value={contextValue}>
+      {/* Sleek Top Glowing Progress Bar */}
+      {isTransitioning && (
+        <div className="fixed top-0 left-0 right-0 z-50 h-1 bg-transparent pointer-events-none">
+          <div
+            className="h-full bg-gradient-to-r from-purple-600 via-indigo-500 to-pink-500 shadow-[0_0_12px_rgba(168,85,247,0.8)] transition-all duration-150 ease-out"
+            style={{ width: `${progress}%` }}
+          />
+        </div>
+      )}
       {children}
     </PageTransitionContext.Provider>
   );
@@ -150,7 +96,7 @@ export const PageTransitionProvider: React.FC<{ children: React.ReactNode }> = (
 export const usePageTransition = () => useContext(PageTransitionContext);
 
 /**
- * Drop-in link component that invokes page transition with filler loading animation
+ * Drop-in link component that navigates immediately with smooth top progress
  */
 export interface TransitionLinkProps extends React.AnchorHTMLAttributes<HTMLAnchorElement> {
   href: string;
@@ -182,17 +128,13 @@ export const TransitionLink: React.FC<TransitionLinkProps> = ({
   };
 
   const handleClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
-    // If modifier keys pressed (Ctrl/Cmd/Shift for new tab), allow native behavior
     if (e.metaKey || e.ctrlKey || e.shiftKey || e.altKey || e.button !== 0) {
       return;
     }
 
-    // Only intercept internal links
-    if (href.startsWith('/') || href.startsWith('#')) {
-      if (!href.startsWith('#')) {
-        e.preventDefault();
-        startTransition(href, targetTitle);
-      }
+    if (href.startsWith('/') && !href.startsWith('#')) {
+      e.preventDefault();
+      startTransition(href, targetTitle);
     }
 
     if (onClick) {
@@ -201,7 +143,7 @@ export const TransitionLink: React.FC<TransitionLinkProps> = ({
   };
 
   return (
-    <a
+    <Link
       href={href}
       onClick={handleClick}
       onMouseEnter={handleMouseEnter}
@@ -209,6 +151,6 @@ export const TransitionLink: React.FC<TransitionLinkProps> = ({
       {...rest}
     >
       {children}
-    </a>
+    </Link>
   );
 };

@@ -1,7 +1,15 @@
-﻿import neo4j, { Driver, Session } from 'neo4j-driver';
+import neo4j, { Driver, Session } from 'neo4j-driver';
+import dns from 'dns';
 import { SERVER_CONFIG } from '../config/env';
 import { sanitizeNeo4jValue } from './cypher-sanitizer';
 import { DatabaseError } from '../errors/app-error';
+
+// Enforce IPv4 priority to eliminate Windows NAT64 IPv6 DNS TLS handshake drops
+try {
+  dns.setDefaultResultOrder('ipv4first');
+} catch {
+  // Ignored in non-Node environments
+}
 
 let driverInstance: Driver | null = null;
 

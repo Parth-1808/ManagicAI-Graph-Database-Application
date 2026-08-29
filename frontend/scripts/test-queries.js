@@ -1,4 +1,6 @@
 const neo4j = require('neo4j-driver');
+const dns = require('dns');
+try { dns.setDefaultResultOrder('ipv4first'); } catch {}
 
 const URI = process.env.COGNODB_URI || 'bolt+s://db-62c8531c.bravo.databases.cognodb.com';
 const USER = process.env.COGNODB_USER || 'cognodb';
