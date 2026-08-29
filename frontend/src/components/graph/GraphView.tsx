@@ -1,6 +1,7 @@
 'use client';
 
 import React, { useState, useEffect, useCallback } from 'react';
+import { AnimatePresence } from 'framer-motion';
 import { useGraph3D } from '@/hooks/useGraph3D';
 import { GraphNode, GraphEdge } from '@/types';
 import { graphService, SubgraphResponse } from '@/services/graphService';
@@ -10,6 +11,7 @@ import { GraphControls } from './GraphControls';
 import { GraphLegend } from './GraphLegend';
 import { GraphNodeDetailsDrawer } from './GraphNodeDetailsDrawer';
 import { GraphCanvas } from './GraphCanvas';
+import { GraphLoadingPreset } from './GraphLoadingPreset';
 
 export interface GraphCategoryOption {
   id: string;
@@ -24,6 +26,11 @@ export const GraphView: React.FC = () => {
   const [portfolioValuation, setPortfolioValuation] = useState<string>('₹335+ Cr Active Portfolio');
   const [isLiveDb, setIsLiveDb] = useState<boolean>(true);
   const [isRefreshing, setIsRefreshing] = useState<boolean>(false);
+
+  // Model loading and rendering lifecycle
+  const [isInitialLoading, setIsInitialLoading] = useState<boolean>(true);
+  const [isCanvasRendered, setIsCanvasRendered] = useState<boolean>(false);
+  const [loadingProgress, setLoadingProgress] = useState<number>(12);
 
   const fetchLiveGraph = useCallback(async (showLoader = false) => {
     if (showLoader) setIsRefreshing(true);
@@ -55,6 +62,42 @@ export const GraphView: React.FC = () => {
     }, 12000);
     return () => clearInterval(interval);
   }, [fetchLiveGraph]);
+
+  // Smooth telemetry progression until the full 3D model renders
+  useEffect(() => {
+    if (!isInitialLoading) return;
+
+    const interval = setInterval(() => {
+      setLoadingProgress((prev) => {
+        if (nodes.length === 0) {
+          // Progressing while fetching from CognoDB Cloud
+          return Math.min(prev + (prev < 30 ? 5 : 2), 65);
+        }
+        if (!isCanvasRendered) {
+          // Data ready, canvas calculating 3D projection & initial render
+          return Math.min(prev + 4, 88);
+        }
+        // Both live graph data & canvas initial frame rendered! Finish smoothly to 100%
+        if (prev < 100) {
+          const next = prev + 12;
+          if (next >= 100) {
+            setTimeout(() => {
+              setIsInitialLoading(false);
+            }, 350);
+            return 100;
+          }
+          return next;
+        }
+        return 100;
+      });
+    }, 40);
+
+    return () => clearInterval(interval);
+  }, [isInitialLoading, nodes.length, isCanvasRendered]);
+
+  const handleCanvasInitialRender = useCallback(() => {
+    setIsCanvasRendered(true);
+  }, []);
 
   const {
     canvasRef,
@@ -129,6 +172,17 @@ export const GraphView: React.FC = () => {
 
         {/* Right 3D Canvas Viewport Column */}
         <div className="lg:col-span-8 xl:col-span-9 rounded-3xl overflow-hidden bg-[#050711] border border-slate-800 shadow-2xl relative h-[650px] sm:h-[720px]">
+          {/* Special 3D Graph Loading Preset Overlay */}
+          <AnimatePresence>
+            {isInitialLoading && (
+              <GraphLoadingPreset
+                progress={loadingProgress}
+                totalNodes={nodes.length || 64}
+                totalEdges={edges.length || 114}
+              />
+            )}
+          </AnimatePresence>
+
           {/* Top Controls Overlay */}
           <GraphControls
             zoomLevel={zoomLevel}
@@ -158,6 +212,7 @@ export const GraphView: React.FC = () => {
             isDragging={isDragging}
             lastMousePos={lastMousePos}
             adjacencyMap={adjacencyMap}
+            onInitialRender={handleCanvasInitialRender}
           />
 
           {/* Bottom Legend Overlay */}

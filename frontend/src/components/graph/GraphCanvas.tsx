@@ -21,6 +21,7 @@ export interface GraphCanvasProps {
   isDragging: React.RefObject<boolean>;
   lastMousePos: React.RefObject<{ x: number; y: number }>;
   adjacencyMap: Map<string, Set<string>>;
+  onInitialRender?: () => void;
 }
 
 export const GraphCanvas: React.FC<GraphCanvasProps> = ({
@@ -41,7 +42,9 @@ export const GraphCanvas: React.FC<GraphCanvasProps> = ({
   isDragging,
   lastMousePos,
   adjacencyMap,
+  onInitialRender,
 }) => {
+  const initialRenderFiredRef = React.useRef(false);
   // ── 3D CANVAS FORCE-DIRECTED GRAPH RENDERER ──
   useEffect(() => {
     const canvas = canvasRef.current;
@@ -272,6 +275,14 @@ export const GraphCanvas: React.FC<GraphCanvasProps> = ({
           ctx.fillText(node.label, node.screenX, node.screenY + node.screenRadius + 14);
         }
       });
+
+      // Notify parent that the 3D model has rendered its initial frame
+      if (!initialRenderFiredRef.current && projectedNodes.length > 0) {
+        initialRenderFiredRef.current = true;
+        if (onInitialRender) {
+          onInitialRender();
+        }
+      }
 
       animationFrameId = requestAnimationFrame(render);
     };
